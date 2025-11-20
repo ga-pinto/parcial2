@@ -6,7 +6,7 @@ export class UpdateAppointmentDto {
   doctorId?: string;
 
   @IsOptional()
-  @IsDateString({}, { message: 'scheduledAt debe ser una fecha válida' })
+  @IsDateString({}, { message: 'La fecha debe ser una fecha válida' })
   scheduledAt?: string;
 
   @IsOptional()

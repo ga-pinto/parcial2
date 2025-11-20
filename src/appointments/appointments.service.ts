@@ -57,7 +57,7 @@ export class AppointmentsService {
       relations: ['user'],
     });
     if (!appointment) {
-      throw new NotFoundException('Cita no encontrada');
+      throw new NotFoundException('La cita no se ha encontrado');
     }
     this.assertAccess(requester, appointment.user.id);
     return appointment;
@@ -84,12 +84,12 @@ export class AppointmentsService {
   async remove(id: string, requester: RequestUser) {
     const appointment = await this.findOne(id, requester);
     await this.appointmentRepo.remove(appointment);
-    return { message: 'Cita eliminada' };
+    return { message: 'La cita fue eliminada' };
   }
 
   private assertAccess(requester: RequestUser, ownerId: string) {
     if (!requester) {
-      throw new ForbiddenException('No autorizado');
+      throw new ForbiddenException('No esta autorizado');
     }
     const isAdmin = requester.roles?.includes('admin');
     if (isAdmin || requester.sub === ownerId) {

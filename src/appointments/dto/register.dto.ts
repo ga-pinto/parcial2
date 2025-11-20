@@ -5,7 +5,7 @@ export class CreateAppointmentDto {
   @IsNotEmpty()
   doctorId: string;
 
-  @IsDateString({}, { message: 'scheduledAt debe ser una fecha válida' })
+  @IsDateString({}, { message: "La fecha debe ser una fecha válida" })
   scheduledAt: string;
 
   @IsOptional()
