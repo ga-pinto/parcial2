@@ -47,10 +47,12 @@ export class UsersService {
 
   async findByEmail(email: string): Promise<User | null> {
     if (!email) return null;
-    return this.userRepo.findOne({
-      where: { email },
-      relations: ['roles'],
-    });
+    return this.userRepo
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.roles', 'roles')
+      .addSelect('user.password')
+      .where('user.email = :email', { email })
+      .getOne();
   }
 
   async findById(id: string): Promise<User | null> {

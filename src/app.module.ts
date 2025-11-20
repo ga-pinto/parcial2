@@ -5,9 +5,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Role } from './entities/role.entity';
+import { Appointment } from './entities/appointments.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { AppointmentsModule } from './appointments/appointments.module';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { RolesModule } from './roles/roles.module';
         username: config.get<string>('DB_USER', 'postgres'),
         password: config.get<string>('DB_PASS', 'admin'),
         database: config.get<string>('DB_NAME', 'parcial2'),
-        entities: [User, Role],
+        entities: [User, Role, Appointment],
         synchronize: true,
         autoLoadEntities: true,
       }),
@@ -30,6 +32,7 @@ import { RolesModule } from './roles/roles.module';
     AuthModule,
     UsersModule,
     RolesModule,
+    AppointmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

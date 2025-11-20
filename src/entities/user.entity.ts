@@ -6,9 +6,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { Appointment } from './appointments.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -47,4 +49,7 @@ export class User {
       this.id = randomUUID();
     }
   }
+
+  @OneToMany(() => Appointment, (appointment) => appointment.user)
+  appointments: Appointment[];
 }

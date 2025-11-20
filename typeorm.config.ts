@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
 import { User } from './src/entities/user.entity';
 import { Role } from './src/entities/role.entity';
+import { Appointment } from './src/entities/appointments.entity';
 
 config();
 
@@ -12,7 +13,7 @@ export default new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [User, Role],
+  entities: [User, Role, Appointment],
   migrations: ['migrations/*.ts'],
   synchronize: false,
 });
